@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anozie Sharon Adaeze — Executive &amp; Virtual Support</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141d33;
+    --ink-2:#1c2541;
+    --paper:#f3efe3;
+    --manila:#d9c79e;
+    --manila-dark:#c2ac7c;
+    --stamp:#a83a32;
+    --sage:#5b7553;
+    --line: rgba(243,239,227,0.16);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'IBM Plex Sans', sans-serif;
+    line-height:1.6;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .display{font-family:'Special Elite', monospace;}
+
+  a{color:var(--manila); text-decoration:none;}
+  a:hover, a:focus-visible{text-decoration:underline;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--manila); outline-offset:3px;}
+
+  /* Folder tab nav */
+  nav{
+    position:sticky; top:0; z-index:20;
+    display:flex; gap:2px;
+    background:var(--ink);
+    padding:14px 5vw 0;
+    overflow-x:auto;
+    border-bottom:1px solid var(--line);
+  }
+  nav a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--paper);
+    background:var(--ink-2);
+    padding:10px 18px 12px;
+    border-radius:8px 8px 0 0;
+    border:1px solid var(--line);
+    border-bottom:none;
+    white-space:nowrap;
+    opacity:0.7;
+    transition: opacity 0.2s, background 0.2s;
+  }
+  nav a:hover{opacity:1; text-decoration:none; background:#232d4e;}
+
+  section{padding:70px 5vw;}
+  .wrap{max-width:880px; margin:0 auto;}
+
+  /* Hero: case-file cover */
+  .cover{
+    position:relative;
+    padding-top:60px;
+  }
+  .stamp{
+    position:absolute;
+    top:64px; right:6vw;
+    width:118px; height:118px;
+    border:3px solid var(--stamp);
+    border-radius:50%;
+    color:var(--stamp);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center;
+    font-family:'Special Elite', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.05em;
+    transform:rotate(-9deg);
+    opacity:0;
+    animation: stampIn 0.5s ease-out 0.4s forwards;
+  }
+  @keyframes stampIn{
+    0%{opacity:0; transform:rotate(-9deg) scale(1.6);}
+    60%{opacity:1;}
+    100%{opacity:0.85; transform:rotate(-9deg) scale(1);}
+  }
+  .label-tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--manila);
+    border:1px solid var(--manila-dark);
+    padding:5px 12px;
+    border-radius:3px;
+    opacity:0;
+    animation: fadeUp 0.6s ease-out 0.1s forwards;
+  }
+  h1{
+    font-family:'Special Elite', monospace;
+    font-weight:400;
+    font-size:clamp(2.1rem, 5.5vw, 3.6rem);
+    line-height:1.1;
+    margin:22px 0 10px;
+    max-width:11ch;
+    opacity:0;
+    animation: fadeUp 0.6s ease-out 0.2s forwards;
+  }
+  .tagline{
+    font-size:1.1rem;
+    color:var(--manila);
+    max-width:46ch;
+    opacity:0;
+    animation: fadeUp 0.6s ease-out 0.3s forwards;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .summary{
+    margin-top:34px;
+    padding-top:34px;
+    border-top:1px solid var(--line);
+    max-width:64ch;
+    color:rgba(243,239,227,0.88);
+  }
+
+  h2{
+    font-family:'Special Elite', monospace;
+    font-weight:400;
+    font-size:1.5rem;
+    color:var(--paper);
+    margin-bottom:6px;
+  }
+  .section-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--sage);
+    margin-bottom:8px;
+  }
+  .section-intro{color:rgba(243,239,227,0.7); max-width:60ch; margin-bottom:36px;}
+
+  /* Skills — card catalog */
+  .catalog{
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .card{
+    background:var(--manila);
+    color:var(--ink-2);
+    width:210px;
+    min-height:150px;
+    padding:18px 18px 16px;
+    border-radius:2px;
+    box-shadow:0 6px 0 rgba(0,0,0,0.18);
+    transform:rotate(var(--rot,0deg));
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor:default;
+  }
+  .card:hover, .card:focus-within{
+    transform:rotate(0deg) translateY(-6px);
+    box-shadow:0 14px 0 rgba(0,0,0,0.22);
+  }
+  .card .tab{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--stamp);
+    margin-bottom:10px;
+  }
+  .card h3{
+    font-family:'Special Elite', monospace;
+    font-weight:400;
+    font-size:1rem;
+    margin:0 0 8px;
+  }
+  .card p{font-size:0.86rem; margin:0; color:#3a3220;}
+
+  /* Experience — case file entries */
+  .entry{
+    border:1px solid var(--line);
+    border-left:4px solid var(--sage);
+    border-radius:4px;
+    padding:22px 24px;
+    margin-bottom:18px;
+    background:rgba(243,239,227,0.03);
+  }
+  .entry-head{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px;
+    align-items:baseline;
+    margin-bottom:10px;
+  }
+  .entry-head h3{
+    font-family:'Special Elite', monospace;
+    font-weight:400;
+    font-size:1.15rem;
+    margin:0;
+  }
+  .entry-head .org{color:var(--manila); font-size:0.95rem;}
+  .status{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--sage);
+    border:1px solid var(--sage);
+    padding:3px 9px;
+    border-radius:20px;
+    white-space:nowrap;
+  }
+  .entry ul{margin:8px 0 0; padding-left:20px; color:rgba(243,239,227,0.85);}
+  .entry li{margin-bottom:5px;}
+
+  /* Credentials */
+  .creds{display:flex; flex-wrap:wrap; gap:16px;}
+  .cred{
+    flex:1 1 260px;
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:20px;
+  }
+  .cred .mono{color:var(--sage); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase;}
+  .cred h3{font-family:'Special Elite', monospace; font-weight:400; font-size:1.05rem; margin:8px 0 4px;}
+  .cred p{margin:0; color:rgba(243,239,227,0.75); font-size:0.9rem;}
+
+  /* Contact */
+  .contact-card{
+    background:var(--manila);
+    color:var(--ink-2);
+    border-radius:6px;
+    padding:34px 36px;
+    display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:flex-start;
+  }
+  .contact-card .stamp2{
+    font-family:'Special Elite', monospace;
+    color:var(--stamp);
+    font-size:0.75rem;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    border:2px solid var(--stamp);
+    display:inline-block;
+    padding:4px 10px;
+    transform:rotate(-4deg);
+    margin-bottom:10px;
+  }
+  .contact-list{list-style:none; margin:0; padding:0; font-size:0.95rem;}
+  .contact-list li{margin-bottom:8px;}
+  .contact-list .k{font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:#5c4e2e; display:block;}
+
+  footer{
+    text-align:center;
+    padding:30px 5vw 50px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    color:rgba(243,239,227,0.4);
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Section navigation">
+  <a href="#profile">Profile</a>
+  <a href="#skills">Skills</a>
+  <a href="#experience">Experience</a>
+  <a href="#credentials">Credentials</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<section class="cover" id="profile">
+  <div class="wrap" style="position:relative;">
+    <div class="stamp" aria-hidden="true">ON<br>FILE</div>
+    <span class="label-tag">Case File — Support Professional</span>
+    <h1>Anozie Sharon Adaeze</h1>
+    <p class="tagline">Executive &amp; Virtual Support Professional — operations, communications, grants &amp; partnerships, with a foundation in ML and data.</p>
+
+    <div class="summary">
+      <p>Law graduate (LL.B., B.L.) based in Abuja, Nigeria, working across executive support, NGO grants and partnerships, and operations coordination. Currently supporting a hotel CEO's daily operations as an Executive Support Assistant, and serving as Grants, Legal and Partnerships Associate at Speak Out Africa Initiative. Holds a foundational AWS Machine Learning certification and is building toward data, ML, and generative AI work.</p>
+      <p>Comfortable managing calendars, inboxes, onboarding communications, and reporting simultaneously — the kind of role where nothing falls through because it's tracked, not remembered.</p>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-eyebrow">Index — 05 categories on file</div>
+    <h2>Core Skills</h2>
+    <p class="section-intro">Filed by area of use.</p>
+    <div class="catalog">
+      <div class="card" style="--rot:-2deg;" tabindex="0">
+        <div class="tab">Ops</div>
+        <h3>Executive &amp; Calendar Support</h3>
+        <p>Scheduling, inbox triage, and day-to-day operations for a principal or CEO.</p>
+      </div>
+      <div class="card" style="--rot:1.5deg;" tabindex="0">
+        <div class="tab">Comms</div>
+        <h3>Communications &amp; Onboarding</h3>
+        <p>Meeting invitations, follow-ups, onboarding messages, and pool-wide coordination.</p>
+      </div>
+      <div class="card" style="--rot:-1deg;" tabindex="0">
+        <div class="tab">Grants</div>
+        <h3>Grant Writing &amp; Partnerships</h3>
+        <p>Proposal drafting, stakeholder synthesis, and funder-aligned narrative writing.</p>
+      </div>
+      <div class="card" style="--rot:2deg;" tabindex="0">
+        <div class="tab">Docs</div>
+        <h3>Documentation &amp; Reporting</h3>
+        <p>Meeting minutes, performance sheets, conference reports, and structured guides.</p>
+      </div>
+      <div class="card" style="--rot:-2.5deg;" tabindex="0">
+        <div class="tab">Data</div>
+        <h3>Data &amp; ML Foundations</h3>
+        <p>AWS-certified in machine learning fundamentals; building toward applied data and AI work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-eyebrow">Record — 04 entries on file</div>
+    <h2>Experience</h2>
+    <p class="section-intro">Chronological, most recent first.</p>
+
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <h3>Executive Support Assistant</h3>
+          <div class="org">Yellow Door Hotels — placed via TalentWorks</div>
+        </div>
+        <span class="status">Current</span>
+      </div>
+      <ul>
+        <li>Supports the CEO's daily operations at a boutique hotel in Wuse 2, Abuja.</li>
+        <li>Manages active shipments, communication tools, and day-to-day executive needs.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <h3>Grants, Legal and Partnerships Associate</h3>
+          <div class="org">Speak Out Africa Initiative (SOAI)</div>
+        </div>
+        <span class="status">Current</span>
+      </div>
+      <ul>
+        <li>Led drafting of a Gates Foundation grant proposal for a community-integrated Severe Acute Malnutrition treatment model.</li>
+        <li>Synthesized input from multiple stakeholders across several proposal draft cycles.</li>
+        <li>Supports partnerships and legal/administrative matters across SOAI's nutrition, gender inclusion, and governance work.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <h3>ESP Pool Operations Coordinator</h3>
+          <div class="org">TalentWorks</div>
+        </div>
+        <span class="status">Ongoing</span>
+      </div>
+      <ul>
+        <li>Manages ESP Pool operations — meeting invitations, follow-ups, performance sheets, and ESA onboarding.</li>
+        <li>Coordinates with executives and handles outreach to prospective ESA clients.</li>
+        <li>Organized a Knowledge Sharing Session on interview preparation for the ESP Pool.</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-head">
+        <div>
+          <h3>Executive Virtual Assistant</h3>
+          <div class="org">MHCI</div>
+        </div>
+        <span class="status">Past</span>
+      </div>
+      <ul>
+        <li>Coordinated ESP Stream 11, running weekly ESA pool check-in meetings.</li>
+        <li>Drafted staff communications and managed relationships with Shadow Executives and placement candidates.</li>
+        <li>Handled recall and offboarding communications for ESAs.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="wrap">
+    <div class="section-eyebrow">Verified — 02 documents on file</div>
+    <h2>Credentials</h2>
+    <div class="creds">
+      <div class="cred">
+        <span class="mono">Certification</span>
+        <h3>AWS Machine Learning Foundations</h3>
+        <p>Foundational certification in machine learning concepts and applications.</p>
+      </div>
+      <div class="cred">
+        <span class="mono">Education</span>
+        <h3>LL.B. &amp; B.L.</h3>
+        <p>Law degree, providing a foundation in analytical rigor and structured reasoning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="section-eyebrow">Open — awaiting response</div>
+    <h2>Contact</h2>
+    <div class="contact-card">
+      <div>
+        <span class="stamp2">Available</span>
+        <p style="margin:0; max-width:32ch;">Open to Virtual Assistant and Executive Support opportunities.</p>
+      </div>
+      <ul class="contact-list">
+        <li><span class="k">Email</span><a href="mailto:sharonanozie377@gmail.com">sharonanozie377@gmail.com</a></li>
+        <li><span class="k">Phone</span><span class="mono">08128387823</span></li>
+        <li><span class="k">LinkedIn</span><a href="https://www.linkedin.com/in/sharon-anozie-40264a286" target="_blank" rel="noopener">linkedin.com/in/sharon-anozie</a></li>
+        <li><span class="k">Location</span>Abuja, Nigeria</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>Case file compiled for review — last updated 2026</footer>
+
+</body>
+</html>
